@@ -229,7 +229,7 @@ namespace MatchZy
             )");
         }
 
-        public long InitMatch(string team1name, string team2name, string serverIp, bool isMatchSetup, long liveMatchId, int mapNumber, string seriesType, MatchConfig matchConfig)
+        public string InitMatch(string team1name, string team2name, string serverIp, bool isMatchSetup, string liveMatchId, int mapNumber, string seriesType, MatchConfig matchConfig)
         {
             try
             {
@@ -237,7 +237,7 @@ namespace MatchZy
                 string dateTimeExpression = (connection is SqliteConnection) ? "datetime('now')" : "NOW()";
 
                 if (mapNumber == 0) {
-                    if (isMatchSetup && liveMatchId != -1) {
+                    if (isMatchSetup && liveMatchId != "-1") {
                         connection.Execute(@"
                             INSERT INTO matchzy_stats_matches (matchid, start_time, team1_name, team2_name, series_type, server_ip)
                             VALUES (@liveMatchId, " + dateTimeExpression + ", @team1name, @team2name, @seriesType, @serverIp)",
@@ -250,7 +250,7 @@ namespace MatchZy
                     }
                 }
 
-                if (isMatchSetup && liveMatchId != -1) {
+                if (isMatchSetup && liveMatchId != "-1") {
                     connection.Execute(@"
                         INSERT INTO matchzy_stats_maps (matchid, start_time, mapnumber, mapname)
                         VALUES (@liveMatchId, " + dateTimeExpression + ", @mapNumber, @mapName)",
@@ -259,14 +259,14 @@ namespace MatchZy
                 }
 
                 // Retrieve the last inserted match_id
-                long matchId = -1;
+                string? matchId = "-1";
                 if (connection is SqliteConnection)
                 {
-                    matchId = connection.ExecuteScalar<long>("SELECT last_insert_rowid()");
+                    matchId = connection.ExecuteScalar<string>("SELECT last_insert_rowid()");
                 }
                 else if (connection is MySqlConnection)
                 {
-                    matchId = connection.ExecuteScalar<long>("SELECT LAST_INSERT_ID()");
+                    matchId = connection.ExecuteScalar<string>("SELECT LAST_INSERT_ID()");
                 }
 
                 connection.Execute(@"
@@ -301,7 +301,7 @@ namespace MatchZy
             }
         }
 
-        public async Task SetMapEndData(long matchId, int mapNumber, string winnerName, int t1score, int t2score, int team1SeriesScore, int team2SeriesScore)
+        public async Task SetMapEndData(string matchId, int mapNumber, string winnerName, int t1score, int t2score, int team1SeriesScore, int team2SeriesScore)
         {
             try
             {
@@ -329,7 +329,7 @@ namespace MatchZy
             } 
         }
 
-        public async Task SetMatchEndData(long matchId, string winnerName, int t1score, int t2score)
+        public async Task SetMatchEndData(string matchId, string winnerName, int t1score, int t2score)
         {
             try
             {
@@ -350,7 +350,7 @@ namespace MatchZy
             }
         }
 
-        public async Task UpdateMapStatsAsync(long matchId, int mapNumber, int t1score, int t2score)
+        public async Task UpdateMapStatsAsync(string matchId, int mapNumber, int t1score, int t2score)
         {
             try
             {
@@ -367,7 +367,7 @@ namespace MatchZy
             }
         }
 
-        public async Task UpdatePlayerStatsAsync(long matchId, int mapNumber, Dictionary<ulong, Dictionary<string, object>> playerStatsDictionary)
+        public async Task UpdatePlayerStatsAsync(string matchId, int mapNumber, Dictionary<ulong, Dictionary<string, object>> playerStatsDictionary)
         {
             try
             {
@@ -479,7 +479,7 @@ namespace MatchZy
             }
         }
 
-        public async Task WritePlayerStatsToCsv(string filePath, long matchId, int mapNumber)
+        public async Task WritePlayerStatsToCsv(string filePath, string matchId, int mapNumber)
         {
             try {
                 string csvFilePath = $"{filePath}/match_data_map{mapNumber}_{matchId}.csv";
@@ -580,7 +580,7 @@ namespace MatchZy
 
         private void Log(string message)
         {
-            Console.WriteLine("[MatchZy] " + message);
+            Console.WriteLine("[DeloPlay] " + message);
         }
 
         public enum DatabaseType

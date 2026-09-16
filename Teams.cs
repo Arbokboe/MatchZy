@@ -70,7 +70,6 @@ namespace MatchZy
         }
 
         [ConsoleCommand("matchzy_addplayer", "Adds player to the provided team")]
-        [ConsoleCommand("get5_addplayer", "Adds player to the provided team")]
         public void OnAddPlayerCommand(CCSPlayerController? player, CommandInfo? command)
         {
             if (player != null || command == null) return;
@@ -116,7 +115,6 @@ namespace MatchZy
         }
 
         [ConsoleCommand("matchzy_removeplayer", "Removes the player from all the teams")]
-        [ConsoleCommand("get5_removeplayer", "Removes the player from all the teams")]
         [CommandHelper(minArgs: 1, usage: "<steam64>")]
         public void OnRemovePlayerCommand(CCSPlayerController? player, CommandInfo? command)
         {

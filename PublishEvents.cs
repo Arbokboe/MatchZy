@@ -10,7 +10,10 @@ namespace MatchZy
         {
             try
             {
-                if (string.IsNullOrEmpty(matchConfig.RemoteLogURL)) return;
+                if (string.IsNullOrEmpty(matchConfig.RemoteLogURL))
+                {
+                    Log("RemoteLogUrl is not set. Event was skipped.");
+                }
 
                 Log($"[SendEventAsync] Sending Event: {@event.EventName} for matchId: {liveMatchId} mapNumber: {matchConfig.CurrentMapNumber} on {matchConfig.RemoteLogURL}");
 

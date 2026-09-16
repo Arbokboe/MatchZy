@@ -100,7 +100,7 @@ public class GrenadeThrownData
 				break;
 			}
 			default:
-				Console.WriteLine($"[MatchZy] Unknown Grenade: {Type}");
+				Console.WriteLine($"[DeloPlay] Unknown Grenade: {Type}");
 				break;
 		}
 

@@ -205,9 +205,6 @@ namespace MatchZy
 
         private void RestoreRoundBackup(CCSPlayerController? player, string fileName)
         {
-
- 
-
             if (IsHalfTimePhase())
             {
                 ReplyToUserCommand(player, Localizer["matchzy.backup.restoreduringhalftime"]);
@@ -269,7 +266,7 @@ namespace MatchZy
                 // MatchID is set first to avoid generating a new one.
                 if (backupData.TryGetValue("matchid", out var matchId))
                 {
-                    liveMatchId = long.Parse(matchId);
+                    liveMatchId = (matchId);
                 }
                 if (backupData.TryGetValue("match_loaded", out var matchLoaded))
                 {
@@ -542,7 +539,6 @@ namespace MatchZy
             return Newtonsoft.Json.JsonConvert.SerializeObject(teamConfig);
         }
 
-        [ConsoleCommand("get5_loadbackup", "Restore the backup from the provided file")]
         [ConsoleCommand("matchzy_loadbackup", "Restore the backup from the provided file")]
         [CommandHelper(minArgs: 1, usage: "<backup_file_name>")]
         public void OnLoadBackupCommand(CCSPlayerController? player, CommandInfo command)
@@ -561,7 +557,6 @@ namespace MatchZy
             RestoreRoundBackup(player, fileName);
         }
 
-        [ConsoleCommand("get5_loadbackup_url", "Loads a backup from the given URL")]
         [ConsoleCommand("matchzy_loadbackup_url", "Loads a backup from the given URL")]
         public void LoadBackupFromURL(CCSPlayerController? player, CommandInfo command)
         {

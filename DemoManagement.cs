@@ -61,7 +61,7 @@ namespace MatchZy
 
         }
 
-        public void StopDemoRecording(float delay, string activeDemoFile, long liveMatchId, int currentMapNumber)
+        public void StopDemoRecording(float delay, string activeDemoFile, string liveMatchId, int currentMapNumber)
         {
             Log($"[StopDemoRecording] Going to stop demorecording in {delay}s");
             string demoPath = Path.Join(Server.GameDirectory + "/csgo/", activeDemoFile);

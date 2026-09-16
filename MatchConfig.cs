@@ -23,7 +23,7 @@ namespace MatchZy
         public bool SkipVeto { get; set; } = true;
 
         [JsonPropertyName("match_id")]
-        public long MatchId { get; set; }
+        public string MatchId { get; set; }
 
         [JsonPropertyName("num_maps")]
         public int NumMaps { get; set; } = 1;

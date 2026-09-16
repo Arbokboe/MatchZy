@@ -389,7 +389,7 @@ namespace MatchZy
                 isKnifeRound = false;
                 isSideSelectionPhase = false;
                 isMatchLive = false;
-                liveMatchId = -1;
+                liveMatchId = "-1";
                 isPractice = false;
                 isDryRun = false;
                 isVeto = false;
@@ -1053,7 +1053,7 @@ namespace MatchZy
                     (Dictionary<ulong, Dictionary<string, object>> playerStatsDictionary, List<StatsPlayer> playerStatsListTeam1, List<StatsPlayer> playerStatsListTeam2) = GetPlayerStatsDict();
 
                     int currentMapNumber = matchConfig.CurrentMapNumber;
-                    long matchId = liveMatchId;
+                    string matchId = liveMatchId;
                     int ctTeamNum = reverseTeamSides["CT"] == matchzyTeam1 ? 1 : 2;
                     int tTeamNum = reverseTeamSides["TERRORIST"] == matchzyTeam1 ? 1 : 2;
                     Winner winner = new(@event.Winner.ToString(), t1score > t2score ? "team1" : "team2");
@@ -1745,7 +1745,7 @@ namespace MatchZy
 
         private void Log(string message)
         {
-            Console.WriteLine("[MatchZy] " + message);
+            Console.WriteLine("[DeloPlay] " + message);
         }
 
         private void AutoStart()
@@ -1853,7 +1853,7 @@ namespace MatchZy
             return value;
         }
 
-        public async Task UploadFileAsync(string? filePath, string fileUploadURL, string headerKey, string headerValue, long matchId, int mapNumber, int roundNumber)
+        public async Task UploadFileAsync(string? filePath, string fileUploadURL, string headerKey, string headerValue, string matchId, int mapNumber, int roundNumber)
         {
             if (filePath == null || fileUploadURL == "")
             {

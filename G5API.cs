@@ -117,7 +117,6 @@ namespace MatchZy
             if (gamestate != Get5GameState.None)
             {
                 get5Status.LoadedConfigFile = loadedConfigFile;
-                get5Status.MatchId = liveMatchId;
                 get5Status.MapNumber = matchConfig.CurrentMapNumber;
             }
 
