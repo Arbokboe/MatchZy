@@ -24,9 +24,9 @@ namespace MatchZy
 
                 Log($"[SendEventAsync] SENDING DATA: {jsonString}");
 
-                if (!string.IsNullOrEmpty(matchConfig.RemoteLogHeaderKey) && !string.IsNullOrEmpty(matchConfig.RemoteLogHeaderValue))
+                if (!string.IsNullOrEmpty(secretHeaderKey) && !string.IsNullOrEmpty(secretHeaderValue))
                 {
-                    httpClient.DefaultRequestHeaders.Add(matchConfig.RemoteLogHeaderKey, matchConfig.RemoteLogHeaderValue);
+                    httpClient.DefaultRequestHeaders.Add(secretHeaderKey, secretHeaderValue);
                 }
 
                 var httpResponseMessage = await httpClient.PostAsync(matchConfig.RemoteLogURL, jsonContent);

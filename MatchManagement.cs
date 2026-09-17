@@ -537,12 +537,12 @@ namespace MatchZy
                 }
             }
 
-            if (jsonDataObject["remote_log_header_key"] != null)
+            if (jsonDataObject["remoteLogHeaderKey"] != null)
             {
                 matchConfig.RemoteLogHeaderKey = jsonDataObject["remote_log_header_key"]!.ToString().Trim();
             }
 
-            if (jsonDataObject["remote_log_header_value"] != null)
+            if (jsonDataObject["remoteLogHeaderValue"] != null)
             {
                 matchConfig.RemoteLogHeaderValue = jsonDataObject["remote_log_header_value"]!.ToString().Trim();
             }

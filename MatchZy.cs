@@ -64,6 +64,9 @@ namespace MatchZy
         public bool isSaveNadesAsGlobalEnabled = false;
         public bool isPlayOutEnabled = false;
         public bool playerHasTakenDamage = false;
+        
+        public string? secretHeaderKey = null;
+        public string? secretHeaderValue = null;
 
         // Commands registry
         public Dictionary<string, Action<CCSPlayerController?, CommandInfo?>>? commandActions;
@@ -71,6 +74,7 @@ namespace MatchZy
 
         public override void Load(bool hotReload)
         {
+            LoadSecretHeaders();
             LoadAdmins();
             database.InitializeDatabase(ModuleDirectory);
 

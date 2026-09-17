@@ -2053,5 +2053,26 @@ namespace MatchZy
                 spawnPosition.Teleport(player);
             }
         }
+        
+        private void LoadSecretHeaders()
+        {
+            try
+            {
+                string secretCfgPath = Path.Join(Server.GameDirectory, "csgo", "cfg", "MatchZy", "secret.cfg");
+                
+                if (!File.Exists(secretCfgPath))
+                {
+                    Log($"[LoadSecretHeaders WARNING] secret.cfg not found at expected paths.");
+                    return;
+                }
+
+                secretHeaderKey = GetConvarValueFromCFGFile(secretCfgPath, "secret_header_key")?.Replace("\"", "").Trim();
+                secretHeaderValue = GetConvarValueFromCFGFile(secretCfgPath, "secret_header_value")?.Replace("\"", "").Trim();
+            }
+            catch (Exception ex)
+            {
+                Log($"[LoadSecretHeaders FATAL] Error reading secret.cfg: {ex.Message}");
+            }
+        }
     }
 }
