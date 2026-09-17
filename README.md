@@ -1,6 +1,6 @@
 ## Custom Fork Modifications
 
-This build contains dedicated improvements, security fixes, and platform-specific adaptations for the **DeloPlay** tournament backend:
+This build contains dedicated improvements, security fixes, and platform-specific adaptations for tournament backend:
 
 * **Secure Webhook Authentication:** Remote event logger loads custom authorization headers directly from a local server configuration file (`csgo/cfg/MatchZy/secret.cfg`), preventing token leakage through public match configuration endpoints.
 * **Thread-Safe Config Resolution:** Configuration file paths (`Server.GameDirectory`) and auth secrets are resolved strictly on the main server thread at plugin startup, eliminating cross-thread native invocation crashes (`Native was invoked on a non-main thread`).
