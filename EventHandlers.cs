@@ -298,7 +298,7 @@ public partial class MatchZy
         }
     }
 
-    public HookResult EventSmokegrenadeDetonateHandler(EventSmokegrenadeDetonate @event, GameEventInfo info)
+    public HookResult EventSmokeGrenadeDetonateHandler(EventSmokegrenadeDetonate @event, GameEventInfo info)
     {
         if (!isPractice || isDryRun) return HookResult.Continue;
         CCSPlayerController? player = @event.Userid;

@@ -105,8 +105,8 @@ namespace MatchZy
 
             string url = command.ArgByIndex(1);
 
-            string headerName = command.ArgCount > 3 ? command.ArgByIndex(2) : "";
-            string headerValue = command.ArgCount > 3 ? command.ArgByIndex(3) : "";
+            string headerName = secretHeaderKey is null ? "" : secretHeaderKey;
+            string headerValue = secretHeaderValue is null ? "" : secretHeaderValue;
 
             Log(
                 $"[LoadMatchDataCommand] Match setup request received with URL: {url} headerName: {headerName} and headerValue: {headerValue}");

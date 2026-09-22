@@ -133,8 +133,7 @@ namespace MatchZy
 
             isDemoRecordingEnabled = bool.TryParse(args, out bool isDemoRecordingEnabledValue) ? isDemoRecordingEnabledValue : args != "0" && isDemoRecordingEnabled;
         }
-
-        [ConsoleCommand("get5_demo_upload_url", "If defined, recorded demos will be uploaded to this URL once the map ends.")]
+        
         [ConsoleCommand("matchzy_demo_upload_url", "If defined, recorded demos will be uploaded to this URL once the map ends.")]
         public void MatchZyDemoUploadURL(CCSPlayerController? player, CommandInfo command)
         {
@@ -255,7 +254,6 @@ namespace MatchZy
         }
 
         [ConsoleCommand("matchzy_allow_force_ready", "Whether force ready using !forceready is enabled or not (Currently works in Match Setup only). Default value: True")]
-        [ConsoleCommand("get5_allow_force_ready", "Whether force ready using !forceready is enabled or not (Currently works in Match Setup only). Default value: True")]
         public void MatchZyAllowForceReadyConvar(CCSPlayerController? player, CommandInfo command)
         {
             if (player != null) return;
@@ -280,8 +278,7 @@ namespace MatchZy
                 ReplyToUserCommand(player, Localizer["matchzy.cc.usage", $"matchzy_max_saved_last_grenades <number>"]);
             }
         }
-
-        [ConsoleCommand("get5_remote_backup_url", "A URL to send backup files to over HTTP. Leave empty to disable.")]
+        
         [ConsoleCommand("matchzy_remote_backup_url", "A URL to send backup files to over HTTP. Leave empty to disable.")]
         [CommandHelper(minArgs: 1, usage: "<remote_backup_upload_url>")]
         public void MatchZyBackupUploadURL(CCSPlayerController? player, CommandInfo command)
@@ -296,8 +293,7 @@ namespace MatchZy
             }
             backupUploadURL = url;
         }
-
-        [ConsoleCommand("get5_remote_backup_header_key", "If defined, a custom HTTP header with this name is added to the backup HTTP request.")]
+        
         [ConsoleCommand("matchzy_remote_backup_header_key", "If defined, a custom HTTP header with this name is added to the backup HTTP request.")]
         [CommandHelper(minArgs: 1, usage: "<remote_backup_header_key>")]
         public void BackupUploadHeaderKeyCommand(CCSPlayerController? player, CommandInfo command)
@@ -307,8 +303,7 @@ namespace MatchZy
 
             if (header != "") backupUploadHeaderKey = header;
         }
-
-        [ConsoleCommand("get5_remote_backup_header_value", "If defined, the value of the custom header added to the backup HTTP request.")]
+        
         [ConsoleCommand("matchzy_remote_backup_header_value", "If defined, the value of the custom header added to the backup HTTP request.")]
         [CommandHelper(minArgs: 1, usage: "<remote_backup_header_value>")]
         public void BackupUploadHeaderValueCommand(CCSPlayerController? player, CommandInfo command)
