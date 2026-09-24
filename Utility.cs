@@ -917,6 +917,8 @@ namespace MatchZy
 
             string statsPath = Server.GameDirectory + "/csgo/MatchZy_Stats/" + liveMatchId.ToString();
 
+            var (playerStatsDictionary, playerStatsListTeam1, playerStatsListTeam2) = GetPlayerStatsDict();
+
             var mapResultEvent = new MapResultEvent
             {
                 MatchId = liveMatchId,
@@ -924,14 +926,17 @@ namespace MatchZy
                 Winner = new Winner(t1score > t2score && reverseTeamSides["CT"] == matchzyTeam1 ? "3" : "2",
                     t1score > t2score ? "team1" : "team2"),
                 StatsTeam1 = new MatchZyStatsTeam(matchzyTeam1.id, matchzyTeam1.teamName, team1SeriesScore, t1score, 0,
-                    0, new List<StatsPlayer>()),
+                    0, playerStatsListTeam1),
                 StatsTeam2 = new MatchZyStatsTeam(matchzyTeam2.id, matchzyTeam2.teamName, team2SeriesScore, t2score, 0,
-                    0, new List<StatsPlayer>())
+                    0, playerStatsListTeam2)
             };
 
             Task.Run(async () =>
             {
                 await SendEventAsync(mapResultEvent);
+
+                await database.UpdatePlayerStatsAsync(liveMatchId, currentMapNumber, playerStatsDictionary);
+
                 await database.SetMapEndData(liveMatchId, currentMapNumber, winnerName, t1score, t2score,
                     team1SeriesScore, team2SeriesScore);
                 await database.WritePlayerStatsToCsv(statsPath, liveMatchId, currentMapNumber);
@@ -949,6 +954,7 @@ namespace MatchZy
             int remainingMaps = matchConfig.NumMaps - matchzyTeam1.seriesScore - matchzyTeam2.seriesScore;
             Log(
                 $"[HandleMatchEnd] MATCH ENDED, remainingMaps: {remainingMaps}, NumMaps: {matchConfig.NumMaps}, Team1SeriesScore: {matchzyTeam1.seriesScore}, Team2SeriesScore: {matchzyTeam2.seriesScore}");
+
             if (matchzyTeam1.seriesScore == matchzyTeam2.seriesScore && remainingMaps <= 0)
             {
                 EndSeries(null, restartDelay - 1, t1score, t2score);
