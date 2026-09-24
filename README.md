@@ -1,3 +1,5 @@
+> **Как устроен MatchZy** (жизненный цикл матча, события, команды, конфиги, где что менять) — разбор для Java-разработчика в [MATCHZY_GUIDE.md](MATCHZY_GUIDE.md).
+
 ## Custom Fork Modifications
 
 This build contains dedicated improvements, security fixes, and platform-specific adaptations for tournament backend:
